@@ -1,14 +1,26 @@
+"use client";
+
 import { Member } from "@prisma/client";
 import { Card, CardFooter } from "@nextui-org/card";
 import Link from "next/link";
 import { calculateAge } from "@/lib/util";
 import { Image } from "@nextui-org/image";
+import React from "react";
+import LikeButton from "@/components/LikeButton";
 
 interface MemberCardProps {
   member: Member;
+  likeIds: string[];
 }
 
-export default function MemberCard({ member }: MemberCardProps) {
+export default function MemberCard({ member, likeIds }: MemberCardProps) {
+  const hasLiked = likeIds.includes(member.userId);
+
+  const preventLinkAction = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <Card fullWidth as={Link} href={`/members/${member.userId}`} isPressable>
       <Image
@@ -18,6 +30,12 @@ export default function MemberCard({ member }: MemberCardProps) {
         src={member.image || "/images/user.png"}
         className="aspect-square object-cover"
       />
+
+      <div onClick={preventLinkAction}>
+        <div className="absolute right-3 top-3 z-50">
+          <LikeButton targetId={member.userId} hasLiked={hasLiked} />
+        </div>
+      </div>
 
       <CardFooter className="bg-dark-gradient absolute bottom-0 z-10 flex justify-start overflow-hidden bg-black">
         <div className="flex flex-col text-white">
