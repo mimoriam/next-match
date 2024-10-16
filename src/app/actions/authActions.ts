@@ -7,7 +7,6 @@ import prisma from "@/lib/prisma";
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
-// @ts-ignore
 import { User } from "@prisma/client";
 
 export async function signInUser(
