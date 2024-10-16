@@ -8,8 +8,11 @@ import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { GiPadlock } from "react-icons/gi";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -24,7 +27,8 @@ export default function RegisterForm() {
     const result = await registerUser(data);
 
     if (result.status === "success") {
-      console.log("User registered successfully");
+      router.push("/login");
+      router.refresh();
     } else {
       if (Array.isArray(result.error)) {
         result.error.forEach((e) => {
