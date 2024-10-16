@@ -2,3 +2,18 @@ npm i -D prettier eslint-plugin-tailwindcss eslint-config-prettier eslint-plugin
 
 npm i @nextui-org/react framer-motion
 npm i react-icons
+
+npm i react-hook-form @hookform/resolvers zod
+npm i react-toastify
+
+npm i next-auth@beta
+npx auth secret
+
+npm i bcryptjs
+npm i -D @types/bcryptjs
+
+npm i @prisma/client @auth/prisma-adapter
+npm i -D prisma
+npx prisma init
+npx prisma migrate dev --name init
+npx prisma studio
