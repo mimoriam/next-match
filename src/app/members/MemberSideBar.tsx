@@ -1,3 +1,5 @@
+"use client";
+
 import { Member } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { Card, CardBody, CardFooter } from "@nextui-org/card";
