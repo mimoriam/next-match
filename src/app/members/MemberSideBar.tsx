@@ -11,17 +11,11 @@ import { Button } from "@nextui-org/button";
 
 interface MemberSideBarProps {
   member: Member;
+  navLinks: {name: string, href: string}[]
 }
 
-export default function MemberSidebar({ member }: MemberSideBarProps) {
+export default function MemberSidebar({ member, navLinks }: MemberSideBarProps) {
   const pathname = usePathname();
-  const basePath = `/members/${member.userId}`;
-
-  const navLinks = [
-    { name: "Profile", href: `${basePath}` },
-    { name: "Photos", href: `${basePath}/photos` },
-    { name: "Chat", href: `${basePath}/chat` },
-  ];
 
   return (
     <Card className="mt-10 h-[80vh] w-full items-center">
