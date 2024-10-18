@@ -9,6 +9,7 @@ import { GiPadlock } from "react-icons/gi";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
+import { handleFormServerErrors } from "@/lib/util";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -30,14 +31,7 @@ export default function RegisterForm() {
       router.push("/login");
       router.refresh();
     } else {
-      if (Array.isArray(result.error)) {
-        result.error.forEach((e) => {
-          const fieldName = e.path.join(".") as "email" | "name" | "password";
-          setError(fieldName, { message: e.message });
-        });
-      } else {
-        setError("root.serverError", { message: result.error });
-      }
+      handleFormServerErrors(result, setError);
     }
   };
   return (
