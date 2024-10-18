@@ -5,9 +5,11 @@ import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { auth } from "@/auth";
 import UserMenu from "@/components/navbar/UserMenu";
+import { getUserInfoForNav } from "@/app/actions/userActions";
 
 export default async function TopNav() {
   const session = await auth();
+  const userInfo = session?.user && (await getUserInfoForNav());
 
   return (
     <Navbar
@@ -38,8 +40,8 @@ export default async function TopNav() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {session?.user ? (
-          <UserMenu user={session.user} />
+        {userInfo ? (
+          <UserMenu userInfo={userInfo} />
         ) : (
           <>
             <Button

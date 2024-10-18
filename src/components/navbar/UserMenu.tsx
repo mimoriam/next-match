@@ -11,12 +11,13 @@ import {
 import { Avatar } from "@nextui-org/avatar";
 import Link from "next/link";
 import { signOutUser } from "@/app/actions/authActions";
+import { transformImageUrl } from "@/lib/util";
 
 interface UserMenuProps {
-  user: Session["user"];
+  userInfo: { name: string | null; image: string | null } | null;
 }
 
-export default function UserMenu({ user }: UserMenuProps) {
+export default function UserMenu({ userInfo }: UserMenuProps) {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
@@ -25,9 +26,9 @@ export default function UserMenu({ user }: UserMenuProps) {
           as="button"
           className="transition-transform"
           color="secondary"
-          name={user?.name || "user avatar"}
+          name={userInfo?.name || "user avatar"}
           size="sm"
-          src={user?.image || "/images/user.png"}
+          src={transformImageUrl(userInfo?.image) || "/images/user.png"}
         />
       </DropdownTrigger>
 
@@ -39,7 +40,7 @@ export default function UserMenu({ user }: UserMenuProps) {
             className="flex h-14 flex-row"
             aria-label="username"
           >
-            Signed in as {user?.name}
+            Signed in as {userInfo?.name}
           </DropdownItem>
         </DropdownSection>
 

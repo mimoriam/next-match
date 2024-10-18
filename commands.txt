@@ -19,3 +19,5 @@ npx prisma migrate dev --name init
 npx prisma studio
 
 npm i date-fns
+
+npm i cloudinary next-cloudinary

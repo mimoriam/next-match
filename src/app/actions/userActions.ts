@@ -44,3 +44,16 @@ export async function updateMemberProfile(
     return { status: "error", error: "Something went wrong" };
   }
 }
+
+export async function getUserInfoForNav() {
+  try {
+    const userId = await getAuthUserId();
+
+    return prisma.user.findUnique({
+      where: { id: userId },
+      select: { name: true, image: true },
+    });
+  } catch (err) {
+    throw err;
+  }
+}
